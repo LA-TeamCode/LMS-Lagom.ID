@@ -35,4 +35,14 @@ Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout'
  */
 Route::middleware([MasterMiddleware::class])->group(function () {
     Route::get('/master', [MasterController::class, 'index'])->name('master');
+
+    /**
+     * Students Routes
+     */
+    Route::get('/master/students', [MasterController::class, 'students'])->name('master.students.data');
+
+    /**
+     * Teachers Routes
+     */
+    Route::get('/master/teachers', [MasterController::class, 'teachers'])->name('master.teachers.data');
 });
