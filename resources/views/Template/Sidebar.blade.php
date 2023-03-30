@@ -1,3 +1,13 @@
+@php
+    $checkRole = auth('admin')->user()->role;
+    $role = '';
+    if ($checkRole == 1) {
+        $role = 'master';
+    } elseif ($checkRole == 2) {
+        $role = 'operator';
+    }
+@endphp
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -36,7 +46,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route($role) }}" class="nav-link {{ request()->is("$role") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -45,7 +55,8 @@
                 </li>
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route("$role.students.data") }}"
+                        class="nav-link {{ request()->is("$role/students") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Data Siswa
@@ -53,7 +64,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route("$role.teachers.data") }}"
+                        class="nav-link {{ request()->is("$role/teachers") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
                             Kependidikan
