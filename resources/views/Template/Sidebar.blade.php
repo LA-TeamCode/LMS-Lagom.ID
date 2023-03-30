@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
         <img src="{{ asset('assets/image/icon.png') }}" alt="AdminLTE Logo" class="brand-image elevation-3">
-        <span class="brand-text font-weight-light">CMS BukuInduk</span>
+        <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ auth('admin')->user()->name }}</a>
             </div>
         </div>
 

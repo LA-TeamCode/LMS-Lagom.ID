@@ -22,16 +22,40 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href=""><b>CMS</b> Buku Induk</a>
+            <a href=""><b></b> {{ env('APP_NAME') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
-                <form action="" method="post">
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                            {{ $error }}
+                        </div>
+                    @endforeach
+                @endif
+                <form action="{{ route('loginAction') }}" method="post">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -39,7 +63,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -49,7 +73,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
@@ -68,7 +92,7 @@
                 </p>
                 <hr>
                 <small>
-                    Copyrght AlulCode &copy; 2023 - CMS BukuInduk v1.0 Beta
+                    Lagom Digital Startup &copy; 2023 - {{ env('APP_NAME') }}
                 </small>
             </div>
             <!-- /.login-card-body -->

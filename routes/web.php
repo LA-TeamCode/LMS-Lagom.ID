@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\MasterController;
+use App\Http\Middleware\MasterMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,13 +28,11 @@ Route::get('/install', function () {
  * Auth Routes
  */
 Route::get('/', [AuthenticationController::class, 'login'])->name('login');
-Route::post('/login', [AuthenticationController::class, 'login'])->name('loginAction');
-
+Route::post('/login', [AuthenticationController::class, 'loginAction'])->name('loginAction');
+Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout');
 /**
  * Master Admin Routes
  */
-Route::prefix('master')->group(function () {
-    Route::get('/', function () {
-        return view('Template.Main');
-    });
+Route::middleware([MasterMiddleware::class])->group(function () {
+    Route::get('/master', [MasterController::class, 'index'])->name('master');
 });

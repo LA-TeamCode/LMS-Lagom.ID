@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('admin_users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nip');
-            $table->string('photo_profile');
-            $table->string('email');
+            $table->string('nip')->nullable();
+            $table->string('photo_profile')->default('default.png');
+            $table->string('email')->unique();
             $table->string('password');
             // 1 = Super Admin
             // 2 = Operator
             $table->integer('role')->default(2);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
