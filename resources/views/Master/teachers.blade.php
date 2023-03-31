@@ -26,8 +26,12 @@
                         <td>Staf TU</td>
                         <td>alulcode@gmail.com</td>
                         <td>
-                            <a href="#" class="btn btn-primary m-1">Edit</a>
-                            <a href="#" class="btn btn-danger m-1">Hapus</a>
+                            <a href="#" class="btn btn-success m-1" data-toggle="tooltip" data-placement="top"
+                                title="Lihat Data"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-primary m-1" data-toggle="tooltip" data-placement="top"
+                                title="Edit Data"><i class="fa fa-pencil-alt"></i></a>
+                            <a href="#" class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
+                                title="Hapus Data"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -54,6 +58,8 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#students_data_wrapper .col-md-6:eq(0)');
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 @endsection

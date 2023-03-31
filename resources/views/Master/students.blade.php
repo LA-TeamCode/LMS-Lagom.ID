@@ -25,11 +25,15 @@
                         <td>Muhammad Khoyron Ahlaqul Firdaus</td>
                         <td>123456789101112</td>
                         <td>7A</td>
-                        <td><a href="#" class="btn btn-success">Foto Awal Siswa</a></td>
-                        <td><a href="#" class="btn btn-success">Foto Akhir Siswa</a></td>
+                        <td><a href="#" class="btn btn-info">Foto Awal Siswa</a></td>
+                        <td><a href="#" class="btn btn-info">Foto Akhir Siswa</a></td>
                         <td>
-                            <a href="#" class="btn btn-primary m-1">Edit</a>
-                            <a href="#" class="btn btn-danger m-1">Hapus</a>
+                            <a href="#" class="btn btn-success m-1" data-toggle="tooltip" data-placement="top"
+                                title="Lihat Data"><i class="fa fa-eye"></i></a>
+                            <a href="#" class="btn btn-primary m-1" data-toggle="tooltip" data-placement="top"
+                                title="Edit Data"><i class="fa fa-pencil-alt"></i></a>
+                            <a href="#" class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
+                                title="Hapus Data"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -57,6 +61,9 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#students_data_wrapper .col-md-6:eq(0)');
+
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 @endsection
