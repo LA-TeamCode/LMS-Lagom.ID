@@ -39,6 +39,7 @@ Route::middleware([MasterMiddleware::class])->group(function () {
     /**
      * Students Routes
      */
+    Route::get('/master/api/students', [MasterController::class, 'api_students'])->name('master.students.api.data');
     Route::get('/master/students', [MasterController::class, 'students'])->name('master.students.data');
 
     /**

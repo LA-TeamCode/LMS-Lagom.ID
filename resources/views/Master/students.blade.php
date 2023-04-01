@@ -20,22 +20,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Muhammad Khoyron Ahlaqul Firdaus</td>
-                        <td>123456789101112</td>
-                        <td>7A</td>
-                        <td><a href="#" class="btn btn-info">Foto Awal Siswa</a></td>
-                        <td><a href="#" class="btn btn-info">Foto Akhir Siswa</a></td>
-                        <td>
-                            <a href="#" class="btn btn-success m-1" data-toggle="tooltip" data-placement="top"
-                                title="Lihat Data"><i class="fa fa-eye"></i></a>
-                            <a href="#" class="btn btn-primary m-1" data-toggle="tooltip" data-placement="top"
-                                title="Edit Data"><i class="fa fa-pencil-alt"></i></a>
-                            <a href="#" class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
-                                title="Hapus Data"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
+                    @foreach ($students as $student)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $student->nama_lengkap }}</td>
+                            <td>{{ $student->nisn }}</td>
+                            <td>{{ \App\Models\KomliModel::find($student->id_komli)->nama_komli }}</td>
+                            <td><a href="#" class="btn btn-info">Foto Awal Siswa</a></td>
+                            <td><a href="#" class="btn btn-info">Foto Akhir Siswa</a></td>
+                            <td>
+                                <a href="#" class="btn btn-success m-1" data-toggle="tooltip" data-placement="top"
+                                    title="Lihat Data"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="btn btn-primary m-1" data-toggle="tooltip" data-placement="top"
+                                    title="Edit Data"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="#" class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
+                                    title="Hapus Data"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
@@ -55,13 +57,80 @@
 @section('script')
     <script>
         $(function() {
-            $("#students_data").DataTable({
+            $.fn.dataTable.ext.errMode = 'none';
+            $('#students_data').DataTable({
+                ajax: "{{ route('master.students.api.data') }}",
+                "order": [
+                    [2, "asc"]
+                ],
+                columns: [{
+                        data: null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'nama_lengkap',
+                        "width": "23%"
+                    },
+                    {
+                        data: 'nisn'
+                    },
+                    {
+                        data: 'id_komli',
+                        render: function(data, type) {
+                            if (type === 'display') {
+                                return "{{ \App\Models\KomliModel::find($student->id_komli)->nama_komli }}"
+                            }
+                        }
+                    },
+                    {
+                        data: 'id',
+                        render: function(data, type) {
+                            let link = window.location.origin;
+                            if (type === 'display') {
+                                return "<a class='btn btn-success' href='" + link +
+                                    "/admin/data-siswa/foto-awal-siswa/" + data +
+                                    "'>Foto Awal Siswa</a>"
+                            }
+                        }
+                    },
+                    {
+                        data: 'id',
+                        render: function(data, type) {
+                            let link = window.location.origin;
+                            if (type === 'display') {
+                                return "<a class='btn btn-success' href='" + link +
+                                    "/admin/data-siswa/foto-akhir-siswa/" + data +
+                                    "'>Foto Akhir Siswa</a>"
+                            }
+                        }
+                    },
+                    {
+                        data: 'id',
+                        render: function(data, type) {
+                            if (type === 'display') {
+                                let linkEdit = window.location.origin + "/admin/data-siswa/edit/" +
+                                    data;
+                                let linkHapus = window.location.origin +
+                                    "/admin/data-siswa/delete/" +
+                                    data;
+                                let linkLihat = window.location.origin +
+                                    "/admin/data-siswa/detail/" +
+                                    data;
+                                return ' <a class="btn btn-primary m-1" href="' +
+                                    linkLihat +
+                                    '"> <i class="fa fa-pencil-alt"></i> </a> <a class="btn btn-danger m-1" href="' +
+                                    linkHapus + '"> <i class="fa fa-trash"></i> </a>'
+                            }
+                        }
+                    }
+                ],
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#students_data_wrapper .col-md-6:eq(0)');
-
 
             $('[data-toggle="tooltip"]').tooltip();
         });

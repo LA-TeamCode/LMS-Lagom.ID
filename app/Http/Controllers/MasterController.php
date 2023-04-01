@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StudentsModel;
 use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
+    /**
+     * API for students
+     */
+    public function api_students()
+    {
+        $data = StudentsModel::all();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
     /**
      * View dashboard
      */
@@ -18,7 +29,10 @@ class MasterController extends Controller
      */
     public function students()
     {
-        return view('Master.students');
+        $data = [
+            'students' => StudentsModel::all()
+        ];
+        return view('Master.students', $data);
     }
 
     /**
