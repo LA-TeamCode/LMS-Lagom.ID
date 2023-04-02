@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KomliModel;
+use App\Models\MapelModel;
 use App\Models\StudentsModel;
 use App\Models\TeachersModel;
 use Illuminate\Http\Request;
@@ -122,6 +123,76 @@ class MasterController extends Controller
         ];
 
         if (TeachersModel::create($data)) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * View Courses
+     */
+    public function courses()
+    {
+        $data = [
+            'courses' => MapelModel::orderBy('kelompok', 'ASC')->get()
+        ];
+        return view('Master.courses', $data);
+    }
+    /**
+     * Add courses
+     */
+    public function addCourse(Request $request)
+    {
+        $data = [
+            'matapelajaran' => $request->mapel,
+            'kelompok' => $request->kelompok,
+        ];
+
+        if (MapelModel::create($data)) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * Delete courses
+     */
+    public function deleteCourse($id_course)
+    {
+        $data = MapelModel::find($id_course);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Hapus data sukses');
+        } else {
+            return redirect()->back()->with('error', 'Hapus data gagal');
+        }
+    }
+    /**
+     * Update courses
+     */
+    public function updateCourse(Request $request)
+    {
+        $data = MapelModel::find($request->id_course);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $data->matapelajaran = $request->mapel;
+        $data->kelompok = $request->kelompok;
+
+        if ($data->save()) {
             return response()->json([
                 'massage' => "success"
             ], 200);
