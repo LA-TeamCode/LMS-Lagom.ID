@@ -68,7 +68,7 @@
                         class="nav-link {{ request()->is("$role/teachers") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
-                            Kependidikan
+                            Guru dan Staff
                         </p>
                     </a>
                 </li>

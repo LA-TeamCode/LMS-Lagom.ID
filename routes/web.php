@@ -34,16 +34,18 @@ Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout'
  * Master Admin Routes
  */
 Route::middleware([MasterMiddleware::class])->group(function () {
-    Route::get('/master', [MasterController::class, 'index'])->name('master');
+    Route::prefix('/master')->group(function () {
 
-    /**
-     * Students Routes
-     */
-    Route::get('/master/api/students', [MasterController::class, 'api_students'])->name('master.students.api.data');
-    Route::get('/master/students', [MasterController::class, 'students'])->name('master.students.data');
+        Route::get('/', [MasterController::class, 'index'])->name('master');
 
-    /**
-     * Teachers Routes
-     */
-    Route::get('/master/teachers', [MasterController::class, 'teachers'])->name('master.teachers.data');
+        Route::get('/api/students', [MasterController::class, 'api_students'])->name('master.students.api.data');
+        Route::get('/students', [MasterController::class, 'students'])->name('master.students.data');
+
+        Route::get('/teachers', [MasterController::class, 'teachers'])->name('master.teachers.data');
+        Route::post('/teachers', [MasterController::class, 'addTeacher'])->name('master.teacher.add.data');
+        Route::get('/teachers/{id_teacher}', [MasterController::class, 'viewTeacher'])->name('master.teachers.view.data');
+        Route::get('/teachers/edit/{id_teacher}', [MasterController::class, 'editTeacher'])->name('master.teachers.edit.data');
+        Route::post('/teachers/edit/{id_teacher}', [MasterController::class, 'updateTeacher'])->name('master.teachers.update.data');
+        Route::get('/teachers/delete/{id_teacher}', [MasterController::class, 'deleteTeacher'])->name('master.teachers.delete.data');
+    });
 });
