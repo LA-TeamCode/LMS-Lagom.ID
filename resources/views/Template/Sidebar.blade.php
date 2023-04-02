@@ -98,7 +98,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('master.classes.data') }}"
+                        class="nav-link {{ request()->is("$role/classes") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-school"></i>
                         <p>
                             Kelas / Komli

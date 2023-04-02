@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JurusanModel;
 use App\Models\KomliModel;
 use App\Models\MapelModel;
 use App\Models\StudentsModel;
@@ -191,6 +192,81 @@ class MasterController extends Controller
 
         $data->matapelajaran = $request->mapel;
         $data->kelompok = $request->kelompok;
+
+        if ($data->save()) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * View Classes
+     */
+    public function classes()
+    {
+        $data = [
+            'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id_jurusan', '=', 'komli.id_jurusan')
+                ->orderBy('komli.nama_komli', 'ASC')
+                ->get(),
+            'majors' => JurusanModel::all()
+        ];
+        return view('Master.classes', $data);
+    }
+    /**
+     * Add classes
+     */
+    public function addClass(Request $request)
+    {
+        $data = [
+            'nama_komli' => $request->nama_komli,
+            'id_jurusan' => $request->jurusan,
+            'keterangan' => $request->keterangan,
+        ];
+
+        if (KomliModel::create($data)) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * Delete classes
+     */
+    public function deleteClass($id_class)
+    {
+        $data = KomliModel::find($id_class);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Hapus data sukses');
+        } else {
+            return redirect()->back()->with('error', 'Hapus data gagal');
+        }
+    }
+    /**
+     * Update classes
+     */
+    public function updateClass(Request $request)
+    {
+        $data = KomliModel::find($request->id_komli);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $data->nama_komli = $request->nama_komli;
+        $data->id_jurusan = $request->jurusan;
+        $data->keterangan = $request->keterangan;
 
         if ($data->save()) {
             return response()->json([
