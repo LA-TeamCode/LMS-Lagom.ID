@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->id('id_teacher');
-            $table->string('name');
+        Schema::create('staff_guru', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
             $table->string('nip')->nullable();
             $table->string('photo_profile')->default('default.png');
             $table->string('jabatan')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('nuptk')->nullable();
-            $table->boolean('status_guru');
+            $table->boolean('status_guru')->default(true);
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('staff_guru');
     }
 };

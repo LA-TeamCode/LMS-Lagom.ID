@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurusan', function (Blueprint $table) {
+        Schema::create('foto_akhir_siswa', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jurusan');
+            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa');
+            $table->string('foto_akhir')->default('default-user.jpg');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jurusan');
+        Schema::dropIfExists('foto_akhir_siswa');
     }
 };

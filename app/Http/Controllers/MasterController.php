@@ -278,4 +278,75 @@ class MasterController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * View Major
+     */
+    public function majors()
+    {
+        $data = [
+            'majors' => JurusanModel::all()
+        ];
+        return view('Master.majors', $data);
+    }
+    /**
+     * Add major
+     */
+    public function addMajor(Request $request)
+    {
+        $data = [
+            'nama_jurusan' => $request->nama_jurusan,
+            'keterangan' => $request->keterangan,
+        ];
+
+        if (JurusanModel::create($data)) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * Delete major
+     */
+    public function deleteMajor($id_major)
+    {
+        $data = JurusanModel::find($id_major);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Hapus data sukses');
+        } else {
+            return redirect()->back()->with('error', 'Hapus data gagal');
+        }
+    }
+    /**
+     * Update major
+     */
+    public function updateMajor(Request $request)
+    {
+        $data = JurusanModel::find($request->id_jurusan);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $data->nama_jurusan = $request->nama_jurusan;
+        $data->keterangan = $request->keterangan;
+
+        if ($data->save()) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
 }

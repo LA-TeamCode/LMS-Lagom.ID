@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_mata_pelajaran', function (Blueprint $table) {
+        Schema::create('data_ekstrakulikuler', function (Blueprint $table) {
             $table->id();
             $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
-            $table->string('komli_id')->foreign('komli_id')->references('id')->on('komli');
-            $table->integer('mapel_id')->foreign('mapel_id')->references('id')->on('mata_pelajaran');
-            $table->integer('pelajaran_ke');
+            $table->integer('ekstrakulikuler_id')->foreign('ekstrakulikuler_id')->references('id')->on('ekstrakulikuler');
+            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_entry_mapel');
+        Schema::dropIfExists('data_ekstrakulikuler');
     }
 };

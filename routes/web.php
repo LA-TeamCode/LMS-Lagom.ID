@@ -57,5 +57,10 @@ Route::middleware([MasterMiddleware::class])->group(function () {
         Route::post('/classes', [MasterController::class, 'addClass'])->name('master.classes.add.data');
         Route::post('/classes/edit', [MasterController::class, 'updateClass'])->name('master.classes.update.data');
         Route::get('/classes/delete/{id_class}', [MasterController::class, 'deleteClass'])->name('master.classes.delete.data');
+
+        Route::get('/majors', [MasterController::class, 'majors'])->name('master.majors.data');
+        Route::post('/majors', [MasterController::class, 'addMajor'])->name('master.majors.add.data');
+        Route::post('/majors/edit', [MasterController::class, 'updateMajor'])->name('master.majors.update.data');
+        Route::get('/majors/delete/{id_major}', [MasterController::class, 'deleteMajor'])->name('master.majors.delete.data');
     });
 });

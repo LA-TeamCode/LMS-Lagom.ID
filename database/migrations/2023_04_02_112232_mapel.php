@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mapel', function (Blueprint $table) {
-            $table->id('id_mapel');
-            $table->string('matapelajaran');
+        Schema::create('mata_pelajaran', function (Blueprint $table) {
+            $table->id();
+            $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
+            $table->integer('jurusan_id')->foreign('jurusan_id')->references('id')->on('jurusan');
+            $table->string('mata_pelajaran');
             $table->string('kelompok');
         });
     }
