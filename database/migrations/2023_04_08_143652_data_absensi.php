@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa');
             $table->integer('status');
             $table->string('keterangan')->nullable();
+            $table->date('tanggal');
         });
     }
 

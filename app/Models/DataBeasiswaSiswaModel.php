@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentsModel extends Model
+class DataBeasiswaSiswaModel extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_student';
-    protected $table = 'data_students';
-    protected $guarded = ['id_student'];
+    protected $table = 'data_beasiswa_siswa';
+    protected $guarded = ['id'];
     public $timestamps = false;
 }

@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KomliModel extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_komli';
     protected $table = 'komli';
-    protected $guarded = ['id_komli'];
+    protected $guarded = ['id'];
     public $timestamps = false;
 }

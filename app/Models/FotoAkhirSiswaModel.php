@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MapelModel extends Model
+class FotoAkhirSiswaModel extends Model
 {
     use HasFactory;
-    protected $table = 'mata_pelajaran';
+
+    protected $table = 'foto_akhir_siswa';
     protected $guarded = ['id'];
     public $timestamps = false;
 }
