@@ -55,8 +55,8 @@
                 </li>
                 <li class="nav-header">Master Data</li>
                 <li class="nav-item">
-                    <a href="{{ route("$role.students.data") }}"
-                        class="nav-link {{ request()->is("$role/students") ? 'active' : '' }}">
+                    <a href="{{ route("$role.siswa.data") }}"
+                        class="nav-link {{ request()->is("$role/siswa") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Data Siswa
@@ -64,8 +64,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route("$role.teachers.data") }}"
-                        class="nav-link {{ request()->is("$role/teachers") ? 'active' : '' }}">
+                    <a href="{{ route("$role.guru.data") }}"
+                        class="nav-link {{ request()->is("$role/guru") ? 'active' : '' }}">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
                             Guru dan Staff
@@ -73,8 +73,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master.courses.data') }}"
-                        class="nav-link {{ request()->is("$role/courses") ? 'active' : '' }}">
+                    <a href="{{ route('master.mapel.data') }}"
+                        class="nav-link {{ request()->is("$role/mapel") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-book"></i>
                         <p>
                             Mata Pelajaran
@@ -98,8 +98,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('master.classes.data') }}"
-                        class="nav-link {{ request()->is("$role/classes") ? 'active' : '' }}">
+                    <a href="{{ route('master.kelas.data') }}"
+                        class="nav-link {{ request()->is("$role/kelas") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-school"></i>
                         <p>
                             Kelas / Komli
