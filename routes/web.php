@@ -38,29 +38,29 @@ Route::middleware([MasterMiddleware::class])->group(function () {
 
         Route::get('/', [MasterController::class, 'index'])->name('master');
 
-        Route::get('/api/students', [MasterController::class, 'api_students'])->name('master.students.api.data');
-        Route::get('/students', [MasterController::class, 'students'])->name('master.students.data');
+        Route::get('/api/siswa', [MasterController::class, 'api_siswa'])->name('master.siswa.api.data');
+        Route::get('/siswa', [MasterController::class, 'siswa'])->name('master.siswa.data');
 
-        Route::get('/teachers', [MasterController::class, 'teachers'])->name('master.teachers.data');
-        Route::post('/teachers', [MasterController::class, 'addTeacher'])->name('master.teacher.add.data');
-        Route::get('/teachers/{id_teacher}', [MasterController::class, 'viewTeacher'])->name('master.teachers.view.data');
-        Route::get('/teachers/edit/{id_teacher}', [MasterController::class, 'editTeacher'])->name('master.teachers.edit.data');
-        Route::post('/teachers/edit/{id_teacher}', [MasterController::class, 'updateTeacher'])->name('master.teachers.update.data');
-        Route::get('/teachers/delete/{id_teacher}', [MasterController::class, 'deleteTeacher'])->name('master.teachers.delete.data');
+        Route::get('/guru', [MasterController::class, 'guru'])->name('master.guru.data');
+        Route::post('/guru', [MasterController::class, 'addGuru'])->name('master.guru.add.data');
+        Route::get('/guru/{id_guru}', [MasterController::class, 'viewGuru'])->name('master.guru.view.data');
+        Route::get('/guru/edit/{id_guru}', [MasterController::class, 'editGuru'])->name('master.guru.edit.data');
+        Route::post('/guru/edit/{id_guru}', [MasterController::class, 'updateGuru'])->name('master.guru.update.data');
+        Route::get('/guru/delete/{id_guru}', [MasterController::class, 'deleteGuru'])->name('master.guru.delete.data');
 
-        Route::get('/courses', [MasterController::class, 'courses'])->name('master.courses.data');
-        Route::post('/courses', [MasterController::class, 'addCourse'])->name('master.courses.add.data');
-        Route::post('/courses/edit', [MasterController::class, 'updateCourse'])->name('master.courses.update.data');
-        Route::get('/courses/delete/{id_course}', [MasterController::class, 'deleteCourse'])->name('master.courses.delete.data');
+        Route::get('/mapel', [MasterController::class, 'mapel'])->name('master.mapel.data');
+        Route::post('/mapel', [MasterController::class, 'addMapel'])->name('master.mapel.add.data');
+        Route::post('/mapel/edit', [MasterController::class, 'updateMapel'])->name('master.mapel.update.data');
+        Route::get('/mapel/delete/{id_mapel}', [MasterController::class, 'deleteMapel'])->name('master.mapel.delete.data');
 
-        Route::get('/classes', [MasterController::class, 'classes'])->name('master.classes.data');
-        Route::post('/classes', [MasterController::class, 'addClass'])->name('master.classes.add.data');
-        Route::post('/classes/edit', [MasterController::class, 'updateClass'])->name('master.classes.update.data');
-        Route::get('/classes/delete/{id_class}', [MasterController::class, 'deleteClass'])->name('master.classes.delete.data');
+        Route::get('/kelas', [MasterController::class, 'kelas'])->name('master.kelas.data');
+        Route::post('/kelas', [MasterController::class, 'addKelas'])->name('master.kelas.add.data');
+        Route::post('/kelas/edit', [MasterController::class, 'updateKelas'])->name('master.kelas.update.data');
+        Route::get('/kelas/delete/{id_kelas}', [MasterController::class, 'deleteKelas'])->name('master.kelas.delete.data');
 
-        Route::get('/majors', [MasterController::class, 'majors'])->name('master.majors.data');
-        Route::post('/majors', [MasterController::class, 'addMajor'])->name('master.majors.add.data');
-        Route::post('/majors/edit', [MasterController::class, 'updateMajor'])->name('master.majors.update.data');
-        Route::get('/majors/delete/{id_major}', [MasterController::class, 'deleteMajor'])->name('master.majors.delete.data');
+        Route::get('/jurusan', [MasterController::class, 'jurusan'])->name('master.jurusan.data');
+        Route::post('/jurusan', [MasterController::class, 'addJurusan'])->name('master.jurusan.add.data');
+        Route::post('/jurusan/edit', [MasterController::class, 'updateJurusan'])->name('master.jurusan.update.data');
+        Route::get('/jurusan/delete/{id_jurusan}', [MasterController::class, 'deleteJurusan'])->name('master.jurusan.delete.data');
     });
 });

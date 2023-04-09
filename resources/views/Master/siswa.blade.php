@@ -17,7 +17,7 @@
             <h3 class="card-title">Kelola Data Siswa</h3>
         </div>
         <div class="card-body">
-            <table id="students_data" class="table table-bordered table-hover">
+            <table id="siswa_data" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -50,9 +50,9 @@
     <script>
         $(function() {
             $.fn.dataTable.ext.errMode = 'none';
-            var table = $('#students_data').DataTable({
+            var table = $('#siswa_data').DataTable({
                 ajax: {
-                    url: "{{ route('master.students.api.data') }}"
+                    url: "{{ route('master.siswa.api.data') }}"
                 },
 
                 // "responsive": true,
@@ -89,7 +89,7 @@
                         }
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             let link = window.location.origin;
                             if (type === 'display') {
@@ -100,7 +100,7 @@
                         }
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             let link = window.location.origin;
                             if (type === 'display') {
@@ -111,7 +111,7 @@
                         }
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             if (type === 'display') {
                                 let linkEdit = window.location.origin + "/admin/data-siswa/edit/" +

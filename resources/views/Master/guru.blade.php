@@ -29,25 +29,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($teachers as $teacher)
+                    @foreach ($guru as $teacher)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $teacher->name }}</td>
-                            <td>{{ $teacher->tanggal_lahir }}</td>
+                            <td>{{ $teacher->nama }}</td>
+                            <td>{{ $teacher->ttl }}</td>
                             <td>{{ $teacher->jabatan }}</td>
                             <td>{{ $teacher->nip }}</td>
                             <td>{{ $teacher->nuptk }}</td>
                             <td>{{ $teacher->status_guru ? 'Aktif' : 'Tidak Aktif' }}</td>
                             <td>
-                                <a href="{{ route('master.teachers.view.data', $teacher->id_teacher) }}"
-                                    class="btn btn-success m-1" data-toggle="tooltip" data-placement="top"
-                                    title="Lihat Data"><i class="fa fa-eye"></i></a>
-                                {{-- <a href="{{ route('master.teachers.edit.data', $teacher->id_teacher) }}"
-                                    class="btn btn-primary m-1" data-toggle="tooltip" data-placement="top"
-                                    title="Edit Data"><i class="fa fa-pencil-alt"></i></a> --}}
-                                <a href="{{ route('master.teachers.delete.data', $teacher->id_teacher) }}"
-                                    class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
-                                    title="Hapus Data"><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('master.guru.view.data', $teacher->id) }}" class="btn btn-success m-1"
+                                    data-toggle="tooltip" data-placement="top" title="Lihat Data"><i
+                                        class="fa fa-eye"></i></a>
+                                <a href="{{ route('master.guru.delete.data', $teacher->id) }}" class="btn btn-danger m-1"
+                                    data-toggle="tooltip" data-placement="top" title="Hapus Data"><i
+                                        class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -149,7 +146,7 @@
                 const status = $('#status').val();
 
                 $.ajax({
-                    url: "{{ route('master.teacher.add.data') }}",
+                    url: "{{ route('master.guru.add.data') }}",
                     type: "POST",
                     data: {
                         _token: token,
