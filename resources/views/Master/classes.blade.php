@@ -84,7 +84,7 @@
                                 <select name="major" id="major" class="form-control">
                                     <option value="">Pilih Jurusan</option>
                                     @foreach ($majors as $major)
-                                        <option value="{{ $major->id_jurusan }}">{{ $major->nama_jurusan }}</option>
+                                        <option value="{{ $major->id }}">{{ $major->nama_jurusan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -130,7 +130,7 @@
                                 <select name="major" id="majorEdit" class="form-control">
                                     <option value="">Pilih Jurusan</option>
                                     @foreach ($majors as $major)
-                                        <option value="{{ $major->id_jurusan }}">{{ $major->nama_jurusan }}</option>
+                                        <option value="{{ $major->id }}">{{ $major->nama_jurusan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -207,7 +207,7 @@
 
             $('#idKomliEdit').val(data.id);
             $('#classEdit').val(data.nama_komli);
-            $('#majorEdit').val(data.id_jurusan);
+            $('#majorEdit').val(data.jurusan_id);
             $('#keteranganEdit').val(data.keterangan);
 
         }

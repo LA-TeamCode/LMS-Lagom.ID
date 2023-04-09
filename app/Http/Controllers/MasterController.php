@@ -212,6 +212,7 @@ class MasterController extends Controller
     {
         $data = [
             'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id', '=', 'komli.jurusan_id')
+                ->select(['komli.id', 'komli.keterangan', 'komli.nama_komli', 'komli.jurusan_id', 'jurusan.nama_jurusan'])
                 ->orderBy('komli.nama_komli', 'ASC')
                 ->get(),
             'majors' => JurusanModel::all()
@@ -260,7 +261,7 @@ class MasterController extends Controller
      */
     public function updateClass(Request $request)
     {
-        $data = KomliModel::find($request->id_komli);
+        $data = KomliModel::find($request->id);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
