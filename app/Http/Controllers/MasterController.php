@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JurusanModel;
+use App\Models\KeahlianModel;
 use App\Models\KomliModel;
 use App\Models\MapelModel;
 use App\Models\SemesterModel;
@@ -489,6 +490,80 @@ class MasterController extends Controller
         }
 
         $data->semester = $request->semester;
+
+        if ($data->save()) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * View Skills
+     */
+    public function skills()
+    {
+        $data = [
+            'skills' => KeahlianModel::all(),
+        ];
+        return view('Master.skills', $data);
+    }
+    /**
+     * Add skills
+     */
+    public function addSkill(Request $request)
+    {
+        $data = [
+            'bidang_keahlian' => $request->bidang_keahlian,
+            'program_keahlian' => $request->program_keahlian,
+            'paket_keahlian' => $request->paket_keahlian,
+        ];
+
+        if (KeahlianModel::create($data)) {
+            return response()->json([
+                'massage' => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                'massage' => "failed"
+            ], 500);
+        }
+    }
+    /**
+     * Delete skills
+     */
+    public function deleteSkill($id_skills)
+    {
+        $data = KeahlianModel::find($id_skills);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+        if ($data->delete()) {
+            return redirect()->back()->with('success', 'Hapus data sukses');
+        } else {
+            return redirect()->back()->with('error', 'Hapus data gagal');
+        }
+    }
+    /**
+     * Update skills
+     */
+    public function updateSkill(Request $request)
+    {
+        $data = KeahlianModel::find($request->id);
+
+        if (!$data) {
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
+        }
+
+        $data->bidang_keahlian = $request->bidang_keahlian;
+        $data->program_keahlian = $request->program_keahlian;
+        $data->paket_keahlian = $request->paket_keahlian;
 
         if ($data->save()) {
             return response()->json([
