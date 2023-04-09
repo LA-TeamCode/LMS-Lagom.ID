@@ -73,5 +73,11 @@ Route::middleware([MasterMiddleware::class])->group(function () {
         Route::post('/semester', [MasterController::class, 'addSemester'])->name('master.semester.add.data');
         Route::post('/semester/edit', [MasterController::class, 'updateSemester'])->name('master.semester.update.data');
         Route::get('/semester/delete/{id_semester}', [MasterController::class, 'deleteSemester'])->name('master.semester.delete.data');
+
+        //skills
+        Route::get('/skills', [MasterController::class, 'skills'])->name('master.skills.data');
+        Route::post('/skills', [MasterController::class, 'addSkill'])->name('master.skills.add.data');
+        Route::post('/skills/edit', [MasterController::class, 'updateSkill'])->name('master.skills.update.data');
+        Route::get('/skills/delete/{id_skill}', [MasterController::class, 'deleteSkill'])->name('master.skills.delete.data');
     });
 });

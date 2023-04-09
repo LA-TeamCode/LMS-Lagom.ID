@@ -90,7 +90,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('master.skills.data') }}"
+                        class="nav-link {{ request()->is("$role/skills") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-cogs"></i>
                         <p>
                             Keahlian
