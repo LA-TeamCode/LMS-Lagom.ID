@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nip')->nullable();
             $table->string('photo_profile')->default('default.png');
             $table->string('jabatan')->nullable();
-            $table->string('ttl')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('nuptk')->nullable();
             $table->boolean('status_guru')->default(true);
         });

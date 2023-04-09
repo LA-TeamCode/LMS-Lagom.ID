@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\JurusanModel;
 use App\Models\KomliModel;
 use App\Models\MapelModel;
-use App\Models\SiswaModel;
-use App\Models\StaffGuruModel;
+use App\Models\StudentsModel;
+use App\Models\TeachersModel;
 use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
     /**
-     * API for siswa
+     * API for students
      */
-    public function api_siswa()
+    public function api_students()
     {
-        $data = SiswaModel::all();
+        $data = StudentsModel::all();
         return response()->json([
             'data' => $data
         ]);
@@ -29,57 +29,57 @@ class MasterController extends Controller
         return view('Master.index');
     }
     /**
-     * View siswa
+     * View students
      */
-    public function siswa()
+    public function students()
     {
         $data = [
-            'siswa' => SiswaModel::all(),
+            'students' => StudentsModel::all(),
             'komli' =>  KomliModel::all()
         ];
-        return view('Master.siswa', $data);
+        return view('Master.students', $data);
     }
 
     /**
-     * View data guru
+     * View data teachers
      */
-    public function guru()
+    public function teachers()
     {
         $data = [
-            'guru' => StaffGuruModel::orderBy('nama', 'ASC')->get()
+            'teachers' => TeachersModel::orderBy('name', 'ASC')->get()
         ];
-        return view('Master.guru', $data);
+        return view('Master.teachers', $data);
     }
     /** 
-     * View Guru
+     * View Teacher
      */
-    public function viewGuru($id_guru)
+    public function viewTeacher($id_teacher)
     {
-        $data = StaffGuruModel::find($id_guru);
+        $data = TeachersModel::find($id_teacher);
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
         }
 
         $data = [
-            'guru' => StaffGuruModel::find($id_guru)
+            'teacher' => TeachersModel::find($id_teacher)
         ];
-        return view('Master.viewGuru', $data);
+        return view('Master.viewTeacher', $data);
     }
     /**
-     * Update data guru
+     * Update data teacher
      */
-    public function updateGuru(Request $request)
+    public function updateTeacher(Request $request)
     {
-        $data = StaffGuruModel::find($request->id_guru);
+        $data = TeachersModel::find($request->id_teacher);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
         }
 
-        $data->nama = $request->name;
+        $data->name = $request->name;
         $data->nip = $request->nip;
         $data->nuptk = $request->nuptk;
-        $data->ttl = $request->ttl;
+        $data->tanggal_lahir = $request->ttl;
         $data->jabatan = $request->jabatan;
         $data->status_guru = $request->status;
 
@@ -94,11 +94,11 @@ class MasterController extends Controller
         }
     }
     /**
-     * Delete Guru
+     * Delete Teacher
      */
-    public function deleteGuru($id_guru)
+    public function deleteTeacher($id_teacher)
     {
-        $data = StaffGuruModel::find($id_guru);
+        $data = TeachersModel::find($id_teacher);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
@@ -110,20 +110,20 @@ class MasterController extends Controller
         }
     }
     /**
-     * Add guru
+     * Add teacher
      */
-    public function addGuru(Request $request)
+    public function addTeacher(Request $request)
     {
         $data = [
-            'nama' => $request->name,
+            'name' => $request->name,
             'nip' => $request->nip,
             'nuptk' => $request->nuptk,
-            'ttl' => $request->ttl,
+            'tanggal_lahir' => $request->ttl,
             'jabatan' => $request->jabatan,
             'status_guru' => $request->status,
         ];
 
-        if (StaffGuruModel::create($data)) {
+        if (TeachersModel::create($data)) {
             return response()->json([
                 'massage' => "success"
             ], 200);
@@ -134,19 +134,19 @@ class MasterController extends Controller
         }
     }
     /**
-     * View Mapel
+     * View Courses
      */
-    public function mapel()
+    public function courses()
     {
         $data = [
-            'mapel' => MapelModel::orderBy('kelompok', 'ASC')->get()
+            'courses' => MapelModel::orderBy('kelompok', 'ASC')->get()
         ];
-        return view('Master.mapel', $data);
+        return view('Master.courses', $data);
     }
     /**
-     * Add mapel
+     * Add courses
      */
-    public function addMapel(Request $request)
+    public function addCourse(Request $request)
     {
         $data = [
             'matapelajaran' => $request->mapel,
@@ -164,11 +164,11 @@ class MasterController extends Controller
         }
     }
     /**
-     * Delete mapel
+     * Delete courses
      */
-    public function deleteMapel($id_mapel)
+    public function deleteCourse($id_course)
     {
-        $data = MapelModel::find($id_mapel);
+        $data = MapelModel::find($id_course);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
@@ -180,11 +180,11 @@ class MasterController extends Controller
         }
     }
     /**
-     * Update mapel
+     * Update courses
      */
-    public function updateMapel(Request $request)
+    public function updateCourse(Request $request)
     {
-        $data = MapelModel::find($request->id_mapel);
+        $data = MapelModel::find($request->id_course);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
@@ -204,22 +204,22 @@ class MasterController extends Controller
         }
     }
     /**
-     * View Kelas
+     * View Classes
      */
-    public function kelas()
+    public function classes()
     {
         $data = [
-            'kelas' => KomliModel::rightJoin('jurusan', 'jurusan.id_jurusan', '=', 'komli.id_jurusan')
+            'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id_jurusan', '=', 'komli.id_jurusan')
                 ->orderBy('komli.nama_komli', 'ASC')
                 ->get(),
-            'jurusan' => JurusanModel::all()
+            'majors' => JurusanModel::all()
         ];
-        return view('Master.kelas', $data);
+        return view('Master.classes', $data);
     }
     /**
-     * Add kelas
+     * Add classes
      */
-    public function addKelas(Request $request)
+    public function addClass(Request $request)
     {
         $data = [
             'nama_komli' => $request->nama_komli,
@@ -238,11 +238,11 @@ class MasterController extends Controller
         }
     }
     /**
-     * Delete kelas
+     * Delete classes
      */
-    public function deleteKelas($id_kelas)
+    public function deleteClass($id_class)
     {
-        $data = KomliModel::find($id_kelas);
+        $data = KomliModel::find($id_class);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
@@ -254,9 +254,9 @@ class MasterController extends Controller
         }
     }
     /**
-     * Update kelas
+     * Update classes
      */
-    public function updateKelas(Request $request)
+    public function updateClass(Request $request)
     {
         $data = KomliModel::find($request->id_komli);
 
@@ -280,19 +280,19 @@ class MasterController extends Controller
     }
 
     /**
-     * View Jurusan
+     * View Major
      */
-    public function jurusan()
+    public function majors()
     {
         $data = [
-            'jurusan' => JurusanModel::all()
+            'majors' => JurusanModel::all()
         ];
-        return view('Master.jurusan', $data);
+        return view('Master.majors', $data);
     }
     /**
-     * Add jurusan
+     * Add major
      */
-    public function addJurusan(Request $request)
+    public function addMajor(Request $request)
     {
         $data = [
             'nama_jurusan' => $request->nama_jurusan,
@@ -310,11 +310,11 @@ class MasterController extends Controller
         }
     }
     /**
-     * Delete jurusan
+     * Delete major
      */
-    public function deleteJurusan($id_jurusan)
+    public function deleteMajor($id_major)
     {
-        $data = JurusanModel::find($id_jurusan);
+        $data = JurusanModel::find($id_major);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
@@ -326,9 +326,9 @@ class MasterController extends Controller
         }
     }
     /**
-     * Update jurusan
+     * Update major
      */
-    public function updateJurusan(Request $request)
+    public function updateMajor(Request $request)
     {
         $data = JurusanModel::find($request->id_jurusan);
 
