@@ -75,7 +75,9 @@ class MasterController extends Controller
         $data = StaffGuruModel::find($request->id_teacher);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
         $data->nama = $request->name;
@@ -189,7 +191,9 @@ class MasterController extends Controller
         $data = MapelModel::find($request->id_course);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
         $data->mata_pelajaran = $request->mapel;
@@ -264,7 +268,9 @@ class MasterController extends Controller
         $data = KomliModel::find($request->id);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
         $data->nama_komli = $request->nama_komli;
@@ -298,8 +304,7 @@ class MasterController extends Controller
     public function addMajor(Request $request)
     {
         $data = [
-            'nama_jurusan' => $request->nama_jurusan,
-            'keterangan' => $request->keterangan,
+            'nama_jurusan' => $request->jurusan,
         ];
 
         if (JurusanModel::create($data)) {
@@ -333,14 +338,15 @@ class MasterController extends Controller
      */
     public function updateMajor(Request $request)
     {
-        $data = JurusanModel::find($request->id_jurusan);
+        $data = JurusanModel::find($request->id);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
-        $data->nama_jurusan = $request->nama_jurusan;
-        $data->keterangan = $request->keterangan;
+        $data->nama_jurusan = $request->jurusan;
 
         if ($data->save()) {
             return response()->json([
@@ -406,7 +412,9 @@ class MasterController extends Controller
         $data = TahunAjaranModel::find($request->id);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
         $data->tahun_ajaran = $request->tahun_ajaran;
@@ -475,7 +483,9 @@ class MasterController extends Controller
         $data = SemesterModel::find($request->id);
 
         if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
+            return response()->json([
+                'massage' => "Data tidak ditemukan"
+            ], 404);
         }
 
         $data->semester = $request->semester;

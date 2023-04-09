@@ -98,6 +98,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('master.majors.data') }}"
+                        class="nav-link {{ request()->is("$role/majors") ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-code-branch"></i>
+                        <p>
+                            Jurusan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('master.classes.data') }}"
                         class="nav-link {{ request()->is("$role/classes") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-school"></i>
