@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ekstrakulikuler', function (Blueprint $table) {
             $table->id();
+            //remove
             $table->string('ekstrakulikuler');
         });
     }
