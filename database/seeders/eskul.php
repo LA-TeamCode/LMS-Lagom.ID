@@ -17,20 +17,17 @@ class eskul extends Seeder
             0 =>
             array(
                 'id' => 1,
-                'nama_ekstrakulikuler' => 'Praja Muda Karana',
-                'keterangan' => 'Kegiatan Berjalan Dengan Baik',
+                'ekstrakulikuler' => 'Praja Muda Karana',
             ),
             1 =>
             array(
                 'id' => 2,
-                'nama_ekstrakulikuler' => 'PMR',
-                'keterangan' => 'Kegiatan Sosial Masyarakat Kesehatan',
+                'ekstrakulikuler' => 'PMR',
             ),
             2 =>
             array(
                 'id' => 3,
-                'nama_ekstrakulikuler' => 'Hadroh',
-                'keterangan' => 'Kegiatan Musik Keagamaan',
+                'ekstrakulikuler' => 'Hadroh',
             ),
         );
 
