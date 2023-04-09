@@ -34,13 +34,12 @@
                             <td>{{ $class->keterangan }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
-                                    data-placement="top" title="Lihat Data"
-                                    onclick="showModalEdit({{ $class->id_komli }})"><i
+                                    data-placement="top" title="Lihat Data" onclick="showModalEdit({{ $class->id }})"><i
                                         class="fa fa-pencil-alt"></i></button>
 
-                                <a href="{{ route('master.classes.delete.data', $class->id_komli) }}"
-                                    class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
-                                    title="Hapus Data"><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('master.classes.delete.data', $class->id) }}" class="btn btn-danger m-1"
+                                    data-toggle="tooltip" data-placement="top" title="Hapus Data"><i
+                                        class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -204,9 +203,9 @@
         function showModalEdit(id) {
             $('#editData').modal('show');
             const komli = @json($classes);
-            const data = komli.find(item => item.id_komli == id);
+            const data = komli.find(item => item.id == id);
 
-            $('#idKomliEdit').val(data.id_komli);
+            $('#idKomliEdit').val(data.id);
             $('#classEdit').val(data.nama_komli);
             $('#majorEdit').val(data.id_jurusan);
             $('#keteranganEdit').val(data.keterangan);
@@ -232,7 +231,7 @@
                 type: "POST",
                 data: {
                     _token: token,
-                    id_komli: idKomli,
+                    id: idKomli,
                     nama_komli: komli,
                     jurusan: jurusan,
                     keterangan: keterangan

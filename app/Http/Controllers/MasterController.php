@@ -211,7 +211,7 @@ class MasterController extends Controller
     public function classes()
     {
         $data = [
-            'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id_jurusan', '=', 'komli.id_jurusan')
+            'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id', '=', 'komli.jurusan_id')
                 ->orderBy('komli.nama_komli', 'ASC')
                 ->get(),
             'majors' => JurusanModel::all()
