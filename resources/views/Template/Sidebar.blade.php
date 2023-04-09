@@ -85,7 +85,7 @@
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fa fa-map-marker"></i>
                         <p>
-                            Tempat PKL
+                            Mitra Perusahaan
                         </p>
                     </a>
                 </li>
