@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('ekstrakulikuler', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
-            $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
             $table->string('ekstrakulikuler');
         });
     }
