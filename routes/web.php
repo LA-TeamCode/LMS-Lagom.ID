@@ -62,5 +62,16 @@ Route::middleware([MasterMiddleware::class])->group(function () {
         Route::post('/majors', [MasterController::class, 'addMajor'])->name('master.majors.add.data');
         Route::post('/majors/edit', [MasterController::class, 'updateMajor'])->name('master.majors.update.data');
         Route::get('/majors/delete/{id_major}', [MasterController::class, 'deleteMajor'])->name('master.majors.delete.data');
+
+        Route::get('/academic-year', [MasterController::class, 'academicYear'])->name('master.academicYear.data');
+        Route::post('/academic-year', [MasterController::class, 'addAcademicYear'])->name('master.academicYear.add.data');
+        Route::post('/academic-year/edit', [MasterController::class, 'updateAcademicYear'])->name('master.academicYear.update.data');
+        Route::get('/academic-year/delete/{id_academic_year}', [MasterController::class, 'deleteAcademicYear'])->name('master.academicYear.delete.data');
+
+        // semester
+        Route::get('/semester', [MasterController::class, 'semester'])->name('master.semester.data');
+        Route::post('/semester', [MasterController::class, 'addSemester'])->name('master.semester.add.data');
+        Route::post('/semester/edit', [MasterController::class, 'updateSemester'])->name('master.semester.update.data');
+        Route::get('/semester/delete/{id_semester}', [MasterController::class, 'deleteSemester'])->name('master.semester.delete.data');
     });
 });

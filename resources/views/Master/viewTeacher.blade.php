@@ -1,12 +1,12 @@
 @extends('Template.Main')
-@section('title', 'Data Guru - ' . $teacher->name)
+@section('title', 'Data Guru - ' . $teacher->nama)
 
 @section('content')
     <!-- Widget: user widget style 1 -->
     <div class="card card-widget widget-user">
         <!-- Add the bg color to the header using any of the bg-* classes -->
         <div class="widget-user-header bg-info">
-            <h3 class="widget-user-username">{{ $teacher->name }}</h3>
+            <h3 class="widget-user-username">{{ $teacher->nama }}</h3>
             <h5 class="widget-user-desc">{{ $teacher->jabatan }}</h5>
         </div>
         <div class="widget-user-image">
@@ -17,7 +17,7 @@
                 <div class="col-sm-3 border-right">
                     <div class="description-block">
                         <h5 class="description-header">Tanggal Lahir</h5>
-                        <span class="description-text">{{ $teacher->tanggal_lahir }}</span>
+                        <span class="description-text">{{ $teacher->ttl }}</span>
                     </div>
                     <!-- /.description-block -->
                 </div>
@@ -50,7 +50,7 @@
             <!-- /.row -->
             <hr>
             <div class="form-group">
-                <a href="{{ route('master.teachers.data', $teacher->id_teacher) }}" class="btn btn-secondary"><i
+                <a href="{{ route('master.teachers.data', $teacher->id) }}" class="btn btn-secondary"><i
                         class="fa fa-arrow-left"></i></a>
                 <button type="button" class="btn btn-primary text-white" id="showForm"><i
                         class="fa fa-pencil-alt"></i></button>
@@ -76,12 +76,11 @@
             <form id="">
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ $teacher->name }}">
+                    <input type="text" name="name" id="name" class="form-control" value="{{ $teacher->nama }}">
                 </div>
                 <div class="form-group">
                     <label for="ttl">Tempat, Tanggal lahir</label>
-                    <input type="text" name="ttl" id="ttl" class="form-control"
-                        value="{{ $teacher->tanggal_lahir }}">
+                    <input type="text" name="ttl" id="ttl" class="form-control" value="{{ $teacher->ttl }}">
                 </div>
                 <div class="form-group">
                     <label for="nip">NIP</label>
@@ -140,10 +139,10 @@
             const jabatan = $('#jabatan').val();
             const status = $('#status').val();
 
-            const id = "{{ $teacher->id_teacher }}";
+            const id = "{{ $teacher->id }}";
 
             $.ajax({
-                url: "{{ route('master.teachers.update.data', $teacher->id_teacher) }}",
+                url: "{{ route('master.teachers.update.data', $teacher->id) }}",
                 type: "POST",
                 data: {
                     _token: token,

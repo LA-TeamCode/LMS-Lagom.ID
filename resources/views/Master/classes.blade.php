@@ -6,7 +6,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="card-title">Kelola Mata Pelajaran</h3>
+                    <h3 class="card-title">Kelola Komli / Kelas</h3>
                 </div>
                 <div class="col-6 d-flex">
                     <button class="btn btn-primary ml-auto" type="button" data-toggle="modal" data-target="#tambahData">Tambah

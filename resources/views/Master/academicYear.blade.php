@@ -1,12 +1,12 @@
 @extends('Template.Main')
-@section('title', 'Mata Pelajaran')
+@section('title', 'Tahun Ajaran')
 
 @section('content')
     <div class="card shadow rounded">
         <div class="card-header">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="card-title">Kelola Mata Pelajaran</h3>
+                    <h3 class="card-title">Kelola Tahun Ajaran</h3>
                 </div>
                 <div class="col-6 d-flex">
                     <button class="btn btn-primary ml-auto" type="button" data-toggle="modal" data-target="#tambahData">Tambah
@@ -19,25 +19,24 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Kelompok</th>
+                        <th>Tahun Ajaran</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($courses as $course)
+                    @foreach ($academicYears as $academicYear)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $course->mata_pelajaran }}</td>
-                            <td>{{ $course->kelompok }}</td>
+                            <td>{{ $academicYear->tahun_ajaran }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
-                                    data-placement="top" title="Lihat Data" onclick="showModalEdit({{ $course->id }})"><i
+                                    data-placement="top" title="Lihat Data"
+                                    onclick="showModalEdit({{ $academicYear->id }})"><i
                                         class="fa fa-pencil-alt"></i></button>
 
-                                <a href="{{ route('master.courses.delete.data', $course->id) }}" class="btn btn-danger m-1"
-                                    data-toggle="tooltip" data-placement="top" title="Hapus Data"><i
-                                        class="fa fa-trash"></i></a>
+                                <a href="{{ route('master.academicYear.delete.data', $academicYear->id) }}"
+                                    class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"
+                                    title="Hapus Data"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -45,8 +44,7 @@
                 <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Kelompok</th>
+                        <th>Tahun Ajaran</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>
@@ -59,7 +57,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tambahDataLabel">Tambah Data Mata Pelajaran</h5>
+                    <h5 class="modal-title" id="tambahDataLabel">Tambah Data Tahun Ajaran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -73,12 +71,8 @@
                         </div>
                         <div id="form-input">
                             <div class="form-group">
-                                <label for="mapel">Mata Pelajaran</label>
-                                <input type="text" name="mapel" id="mapel" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="kelompok">Kelompok</label>
-                                <input type="text" name="kelompok" id="kelompok" class="form-control">
+                                <label for="class">Tahun Ajaran</label>
+                                <input type="text" id="academicYear" class="form-control" value="">
                             </div>
                         </div>
                     </div>
@@ -95,13 +89,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editDataLabel">Edit Data Mata Pelajaran</h5>
+                    <h5 class="modal-title" id="editDataLabel">Edit Data Tahun Ajaran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form id="editData">
-                    <input type="hidden" id="idMapelEdit" value="">
+                    <input type="hidden" id="idAcademicYearEdit" value="">
                     <div class="modal-body">
                         <div class="text-center">
                             <div class="spinner-border text-primary d-none" id="loadingEdit" role="status">
@@ -110,12 +104,8 @@
                         </div>
                         <div id="form-input">
                             <div class="form-group">
-                                <label for="mapel">Mata Pelajaran</label>
-                                <input type="text" id="mapelEdit" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="kelompok">Kelompok</label>
-                                <input type="text" id="kelompokEdit" class="form-control" value="">
+                                <label for="class">Tahun Ajaran</label>
+                                <input type="text" id="academicYearEdit" class="form-control" value="">
                             </div>
                         </div>
                     </div>
@@ -144,16 +134,14 @@
             $('#loading').removeClass('d-none');
 
             const token = "{{ csrf_token() }}";
-            const mapel = $('#mapel').val();
-            const kelompok = $('#kelompok').val();
+            let academicYear = $('#academicYear').val();
 
             $.ajax({
-                url: "{{ route('master.courses.add.data') }}",
+                url: "{{ route('master.academicYear.add.data') }}",
                 type: "POST",
                 data: {
                     _token: token,
-                    mapel: mapel,
-                    kelompok: kelompok
+                    tahun_ajaran: academicYear
                 },
                 success: function(data) {
                     if (data.massage == 'success') {
@@ -179,12 +167,11 @@
         // show modal edit
         function showModalEdit(id) {
             $('#editData').modal('show');
-            const mapel = @json($courses);
-            const data = mapel.find(item => item.id == id);
+            const academicYear = @json($academicYears);
+            const data = academicYear.find(item => item.id == id);
 
-            $('#mapelEdit').val(data.mata_pelajaran);
-            $('#kelompokEdit').val(data.kelompok);
-            $('#idMapelEdit').val(data.id);
+            $('#idAcademicYearEdit').val(data.id);
+            $('#academicYearEdit').val(data.tahun_ajaran);
         }
 
         // edit data
@@ -195,18 +182,16 @@
             $('#loadingEdit').removeClass('d-none');
 
             const token = "{{ csrf_token() }}";
-            const mapel = $('#mapelEdit').val();
-            const kelompok = $('#kelompokEdit').val();
-            const idMapel = $('#idMapelEdit').val();
+            let idAcademicYear = $('#idAcademicYearEdit').val();
+            let academicYear = $('#academicYearEdit').val();
 
             $.ajax({
-                url: "{{ route('master.courses.update.data') }}",
+                url: "{{ route('master.academicYear.update.data') }}",
                 type: "POST",
                 data: {
                     _token: token,
-                    id_course: idMapel,
-                    mapel: mapel,
-                    kelompok: kelompok
+                    id: idAcademicYear,
+                    tahun_ajaran: academicYear
                 },
                 success: function(data) {
                     if (data.massage == 'success') {

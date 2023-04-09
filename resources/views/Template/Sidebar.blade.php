@@ -107,7 +107,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('master.academicYear.data') }}"
+                        class="nav-link {{ request()->is("$role/academic-year") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-award"></i>
                         <p>
                             Tahun Ajaran
@@ -115,7 +116,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('master.semester.data') }}"
+                        class="nav-link {{ request()->is("$role/semester") ? 'active' : '' }}">
                         <i class="nav-icon fa fa-book-reader"></i>
                         <p>
                             Semester
