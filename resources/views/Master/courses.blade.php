@@ -14,12 +14,36 @@
                 </div>
             </div>
         </div>
+        <style>
+            #semesterFilter,
+            #tahunAjaranFilter {
+                display: inline;
+                width: 200px;
+                margin-left: 25px;
+            }
+        </style>
         <div class="card-body">
+            <div class="mt-1 mb-2" id="filter">
+                <select id="tahunAjaranFilter" class="form-control">
+                    <option value="">Tahun Ajaran</option>
+                    @foreach ($academicYears as $academicYear)
+                        <option value="{{ $academicYear->tahun_ajaran }}">{{ $academicYear->tahun_ajaran }}</option>
+                    @endforeach
+                </select>
+                <select id="semesterFilter" class="form-control">
+                    <option value="">Pilih Semester</option>
+                    @foreach ($semesters as $semester)
+                        <option value="{{ $semester->semester }}">{{ $semester->semester }}</option>
+                    @endforeach
+                </select>
+            </div>
             <table id="students_data" class="table table-bo`rdered table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Mata Pelajaran</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Semester</th>
                         <th>Kelompok</th>
                         <th>Aksi</th>
                     </tr>
@@ -29,6 +53,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $course->mata_pelajaran }}</td>
+                            <td>{{ $course->tahun_ajaran }}</td>
+                            <td>{{ $course->semester }}</td>
                             <td>{{ $course->kelompok }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
@@ -46,6 +72,8 @@
                     <tr>
                         <th>No</th>
                         <th>Mata Pelajaran</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Semester</th>
                         <th>Kelompok</th>
                         <th>Aksi</th>
                     </tr>
@@ -75,6 +103,26 @@
                             <div class="form-group">
                                 <label for="mapel">Mata Pelajaran</label>
                                 <input type="text" name="mapel" id="mapel" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tahun Ajaran</label>
+                                <select id="tahunAjaran" class="form-control">
+                                    <option value="">Tahun Ajaran</option>
+                                    @foreach ($academicYears as $academicYear)
+                                        <option value="{{ $academicYear->tahun_ajaran }}">
+                                            {{ $academicYear->tahun_ajaran }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Semester</label>
+                                <select id="semester" class="form-control">
+                                    <option value="">Pilih Semester</option>
+                                    @foreach ($semesters as $semester)
+                                        <option value="{{ $semester->semester }}">{{ $semester->semester }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="kelompok">Kelompok</label>
@@ -114,6 +162,26 @@
                                 <input type="text" id="mapelEdit" class="form-control" value="">
                             </div>
                             <div class="form-group">
+                                <label for="">Tahun Ajaran</label>
+                                <select id="tahunAjaranEdit" class="form-control">
+                                    <option value="">Tahun Ajaran</option>
+                                    @foreach ($academicYears as $academicYear)
+                                        <option value="{{ $academicYear->tahun_ajaran }}">
+                                            {{ $academicYear->tahun_ajaran }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Semester</label>
+                                <select id="semesterEdit" class="form-control">
+                                    <option value="">Pilih Semester</option>
+                                    @foreach ($semesters as $semester)
+                                        <option value="{{ $semester->semester }}">{{ $semester->semester }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="kelompok">Kelompok</label>
                                 <input type="text" id="kelompokEdit" class="form-control" value="">
                             </div>
@@ -136,6 +204,17 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#students_data_wrapper .col-md-6:eq(0)');
 
+        $("#students_data_filter.dataTables_filter").append($("#filter"));
+
+        $('#tahunAjaranFilter, #semesterFilter').on('change', function() {
+            var selectedTahunAjaran = $('#tahunAjaranFilter').val();
+            var selectedSemester = $('#semesterFilter').val();
+
+            $('#students_data').DataTable().columns(2).search(selectedTahunAjaran).columns(3).search(
+                    selectedSemester)
+                .draw();
+        });
+
         $('[data-toggle="tooltip"]').tooltip();
 
         $('form#addData').submit(function(e) {
@@ -145,6 +224,8 @@
 
             const token = "{{ csrf_token() }}";
             const mapel = $('#mapel').val();
+            const tahun_ajaran = $('#tahunAjaran').val();
+            const semester = $('#semester').val();
             const kelompok = $('#kelompok').val();
 
             $.ajax({
@@ -153,6 +234,8 @@
                 data: {
                     _token: token,
                     mapel: mapel,
+                    tahun_ajaran: tahun_ajaran,
+                    semester: semester,
                     kelompok: kelompok
                 },
                 success: function(data) {
@@ -184,6 +267,8 @@
 
             $('#mapelEdit').val(data.mata_pelajaran);
             $('#kelompokEdit').val(data.kelompok);
+            $('#tahunAjaranEdit').val(data.tahun_ajaran);
+            $('#semesterEdit').val(data.semester);
             $('#idMapelEdit').val(data.id);
         }
 
@@ -197,6 +282,8 @@
             const token = "{{ csrf_token() }}";
             const mapel = $('#mapelEdit').val();
             const kelompok = $('#kelompokEdit').val();
+            const tahun_ajaran = $('#tahunAjaranEdit').val();
+            const semester = $('#semesterEdit').val();
             const idMapel = $('#idMapelEdit').val();
 
             $.ajax({
@@ -206,6 +293,8 @@
                     _token: token,
                     id_course: idMapel,
                     mapel: mapel,
+                    tahun_ajaran: tahun_ajaran,
+                    semester: semester,
                     kelompok: kelompok
                 },
                 success: function(data) {

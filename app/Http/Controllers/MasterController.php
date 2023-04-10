@@ -144,7 +144,12 @@ class MasterController extends Controller
     public function courses()
     {
         $data = [
-            'courses' => MapelModel::orderBy('kelompok', 'ASC')->get()
+            'courses' => MapelModel::leftJoin('tahun_ajaran', 'mata_pelajaran.tahun_ajaran_id', '=', 'tahun_ajaran.id')
+                ->leftJoin('semester', 'mata_pelajaran.semester_id', '=', 'semester.id')
+                ->select('mata_pelajaran.*', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
+                ->get(),
+            'academicYears' => TahunAjaranModel::all(),
+            'semesters' => SemesterModel::all()
         ];
         return view('Master.courses', $data);
     }
@@ -216,9 +221,9 @@ class MasterController extends Controller
     public function classes()
     {
         $data = [
-            'classes' => KomliModel::rightJoin('jurusan', 'jurusan.id', '=', 'komli.jurusan_id')
+            'classes' => KomliModel::leftJoin('jurusan', 'jurusan.id', '=', 'komli.jurusan_id')
                 ->select(['komli.id', 'komli.keterangan', 'komli.nama_komli', 'komli.jurusan_id', 'jurusan.nama_jurusan'])
-                ->orderBy('komli.nama_komli', 'ASC')
+                ->orderBy('komli.id', 'ASC')
                 ->get(),
             'majors' => JurusanModel::all()
         ];
