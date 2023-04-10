@@ -160,6 +160,8 @@ class MasterController extends Controller
     {
         $data = [
             'mata_pelajaran' => $request->mapel,
+            'tahun_ajaran_id' => $request->tahun_ajaran,
+            'semester_id' => $request->semester,
             'kelompok' => $request->kelompok,
         ];
 
@@ -203,6 +205,8 @@ class MasterController extends Controller
         }
 
         $data->mata_pelajaran = $request->mapel;
+        $data->tahun_ajaran_id = $request->tahun_ajaran;
+        $data->semester_id = $request->semester;
         $data->kelompok = $request->kelompok;
 
         if ($data->save()) {

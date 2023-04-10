@@ -109,7 +109,7 @@
                                 <select id="tahunAjaran" class="form-control">
                                     <option value="">Tahun Ajaran</option>
                                     @foreach ($academicYears as $academicYear)
-                                        <option value="{{ $academicYear->tahun_ajaran }}">
+                                        <option value="{{ $academicYear->id }}">
                                             {{ $academicYear->tahun_ajaran }}
                                         </option>
                                     @endforeach
@@ -120,7 +120,7 @@
                                 <select id="semester" class="form-control">
                                     <option value="">Pilih Semester</option>
                                     @foreach ($semesters as $semester)
-                                        <option value="{{ $semester->semester }}">{{ $semester->semester }}</option>
+                                        <option value="{{ $semester->id }}">{{ $semester->semester }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -166,7 +166,7 @@
                                 <select id="tahunAjaranEdit" class="form-control">
                                     <option value="">Tahun Ajaran</option>
                                     @foreach ($academicYears as $academicYear)
-                                        <option value="{{ $academicYear->tahun_ajaran }}">
+                                        <option value="{{ $academicYear->id }}">
                                             {{ $academicYear->tahun_ajaran }}
                                         </option>
                                     @endforeach
@@ -177,7 +177,7 @@
                                 <select id="semesterEdit" class="form-control">
                                     <option value="">Pilih Semester</option>
                                     @foreach ($semesters as $semester)
-                                        <option value="{{ $semester->semester }}">{{ $semester->semester }}</option>
+                                        <option value="{{ $semester->id }}">{{ $semester->semester }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -267,8 +267,8 @@
 
             $('#mapelEdit').val(data.mata_pelajaran);
             $('#kelompokEdit').val(data.kelompok);
-            $('#tahunAjaranEdit').val(data.tahun_ajaran);
-            $('#semesterEdit').val(data.semester);
+            $('#tahunAjaranEdit').val(data.tahun_ajaran_id);
+            $('#semesterEdit').val(data.semester_id);
             $('#idMapelEdit').val(data.id);
         }
 
