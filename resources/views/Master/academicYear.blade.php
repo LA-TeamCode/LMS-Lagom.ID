@@ -31,7 +31,7 @@
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
                                     data-placement="top" title="Lihat Data"
-                                    onclick="showModalEdit({{ $academicYear->id }})"><i
+                                    onclick="showModalEdit('{{ $academicYear->id }}')"><i
                                         class="fa fa-pencil-alt"></i></button>
 
                                 <a href="{{ route('master.academicYear.delete.data', $academicYear->id) }}"

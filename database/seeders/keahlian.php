@@ -16,37 +16,37 @@ class keahlian extends Seeder
         $data =
             [
                 '0' => [
-                    'id' => '7',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => 'Pariwisata',
                     'program_keahlian' => 'Kuliner',
                     'paket_keahlian' => 'Tata Boga',
                 ],
                 '1' => [
-                    'id' => '8',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => 'Teknologi Informasi dan Komunikasi',
                     'program_keahlian' => 'Teknik Informatika dan Komputer',
                     'paket_keahlian' => 'Rekayasa Perangkat Lunak',
                 ],
                 '2' => [
-                    'id' => '9',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => 'Pariwisata',
                     'program_keahlian' => 'Perhotelan dan Jasa Pariwisata',
                     'paket_keahlian' => 'Perhotelan',
                 ],
                 '3' => [
-                    'id' => '10',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => 'Teknologi dan Rekayasa.',
                     'program_keahlian' => ' Teknik Mesin',
                     'paket_keahlian' => 'Teknik Pengelasan',
                 ],
                 '4' => [
-                    'id' => '11',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => 'Energi dan Pertambangan',
                     'program_keahlian' => 'Geologi Pertambangan',
                     'paket_keahlian' => 'Geologi Pertambangan',
                 ],
                 '5' => [
-                    'id' => '12',
+                    'id' => \Illuminate\Support\Str::uuid(),
                     'bidang_keahlian' => ' Agribisnis dan Agroteknologi',
                     'program_keahlian' => 'Agribisnis Ternak',
                     'paket_keahlian' => 'Agribisnis Ternak dan Ruminansia',

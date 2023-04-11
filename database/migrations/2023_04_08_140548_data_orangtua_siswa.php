@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_orangtua_siswa', function (Blueprint $table) {
-            $table->id();
-            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
             // E. ket ayah kandung
             $table->string('nama_ayah')->nullable();
             $table->string('tempat_lahir_ayah')->nullable();

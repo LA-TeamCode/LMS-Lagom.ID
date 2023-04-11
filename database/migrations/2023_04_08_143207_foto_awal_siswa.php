@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('foto_awal_siswa', function (Blueprint $table) {
-            $table->id();
-            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->string('foto_awal')->default('default-user.jpg');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -30,8 +30,8 @@
                             <td>{{ $semester->semester }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
-                                    data-placement="top" title="Lihat Data" onclick="showModalEdit({{ $semester->id }})"><i
-                                        class="fa fa-pencil-alt"></i></button>
+                                    data-placement="top" title="Lihat Data"
+                                    onclick="showModalEdit('{{ $semester->id }}')"><i class="fa fa-pencil-alt"></i></button>
 
                                 <a href="{{ route('master.semester.delete.data', $semester->id) }}"
                                     class="btn btn-danger m-1" data-toggle="tooltip" data-placement="top"

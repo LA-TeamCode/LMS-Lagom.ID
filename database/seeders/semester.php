@@ -16,27 +16,27 @@ class semester extends Seeder
     {
         $data =  [
             '0' => [
-                'id' => '1',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 1',
             ],
             '1' => [
-                'id' => '2',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 2',
             ],
             '2' => [
-                'id' => '3',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 3',
             ],
             '3' => [
-                'id' => '4',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 4',
             ],
             '4' => [
-                'id' => '5',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 5',
             ],
             '5' => [
-                'id' => '6',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'semester' => 'SEMESTER 6',
             ]
         ];

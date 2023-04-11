@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_siswa_pkl', function (Blueprint $table) {
-            $table->id();
-            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa');
-            $table->integer('mitra_perusahaan_id')->foreign('mitra_perusahaan_id')->references('id')->on('mitra_perusahaan');
-            $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
-            $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
+            $table->foreignUuid('mitra_perusahaan_id')->references('id')->on('mitra_perusahaan');
+            $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->string('lama_pelaksanaan')->nullable();
             $table->string('nilai')->default(0);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

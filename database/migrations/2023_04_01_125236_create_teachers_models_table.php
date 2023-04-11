@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('staff_guru', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('nama');
             $table->string('nip')->nullable();
             $table->string('photo_profile')->default('default.png');
             $table->string('jabatan')->nullable();
-            $table->date('tanggal_lahir')->nullable();
+            $table->string('ttl')->nullable();
             $table->string('nuptk')->nullable();
             $table->boolean('status_guru')->default(true);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

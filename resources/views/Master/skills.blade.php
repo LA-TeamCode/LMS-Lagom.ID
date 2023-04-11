@@ -34,8 +34,8 @@
                             <td>{{ $skill->paket_keahlian }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
-                                    data-placement="top" title="Lihat Data" onclick="showModalEdit({{ $skill->id }})"><i
-                                        class="fa fa-pencil-alt"></i></button>
+                                    data-placement="top" title="Lihat Data"
+                                    onclick="showModalEdit('{{ $skill->id }}')"><i class="fa fa-pencil-alt"></i></button>
 
                                 <a href="{{ route('master.skills.delete.data', $skill->id) }}" class="btn btn-danger m-1"
                                     data-toggle="tooltip" data-placement="top" title="Hapus Data"><i

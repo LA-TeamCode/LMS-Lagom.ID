@@ -16,17 +16,17 @@ class eskul extends Seeder
         $data = array(
             0 =>
             array(
-                'id' => 1,
+                'id' => \Illuminate\Support\Str::uuid(),
                 'ekstrakulikuler' => 'Praja Muda Karana',
             ),
             1 =>
             array(
-                'id' => 2,
+                'id' => \Illuminate\Support\Str::uuid(),
                 'ekstrakulikuler' => 'PMR',
             ),
             2 =>
             array(
-                'id' => 3,
+                'id' => \Illuminate\Support\Str::uuid(),
                 'ekstrakulikuler' => 'Hadroh',
             ),
         );

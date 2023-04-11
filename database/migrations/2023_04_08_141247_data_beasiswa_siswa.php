@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_beasiswa_siswa', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             // I. ket perkembangan peserta didik
-            $table->integer('siswa_id')->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
+            $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->string('beasiswa_dari');
             $table->string('tahun_menerima_beasiswa');
             $table->string('kelas_menerima_beasiswa');

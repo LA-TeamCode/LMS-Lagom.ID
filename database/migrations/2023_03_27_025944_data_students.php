@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             //A. keterangan siswa
-            $table->integer('komli_id')->foreign('komli_id')->references('id')->on('komli');
-            $table->integer('nisn')->default(0);
+            $table->foreignUuid('komli_id')->references('id')->on('komli');
+            $table->integer('absen')->nullable();
+            $table->string('nisn')->default(0);
             $table->string('no_induk')->nullable()->default('0');
             $table->string('nama_lengkap');
-            $table->string('nama_panggilan');
+            $table->string('nama_panggilan')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('jenis_kelamin')->nullable();
@@ -60,6 +61,8 @@ return new class extends Migration
             $table->string('nama_perusahaan_bekerja')->nullable();
             $table->date('tanggal_masuk_perusahaan_bekerja')->nullable();
             $table->string('penghasilan')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

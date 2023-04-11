@@ -15,6 +15,7 @@ class add_admin extends Seeder
     public function run(): void
     {
         AdminModel::create([
+            'id' => \Illuminate\Support\Str::uuid(),
             'name' => 'Master Admin',
             'nip' => '12345678',
             'email' => 'master@gmail.com',

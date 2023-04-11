@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             eskul::class,
             tahun_ajaran::class,
-            semester::class,
+            // semester::class,
             jurusan::class,
-            komli::class,
+            // komli::class,
             keahlian::class,
+            add_admin::class,
         ]);
     }
 }

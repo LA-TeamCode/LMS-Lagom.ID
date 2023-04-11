@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('komli', function (Blueprint $table) {
-            $table->id();
-            $table->integer('jurusan_id')->foreign('jurusan_id')->references('id')->on('jurusan');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('jurusan_id')->references('id')->on('jurusan');
             $table->string('nama_komli');
             $table->string('keterangan');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

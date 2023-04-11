@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('nip')->nullable();
             $table->string('photo_profile')->default('default.png');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('role')->default(2);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

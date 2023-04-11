@@ -33,7 +33,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $teacher->nama }}</td>
-                            <td>{{ $teacher->tanggal_lahir }}</td>
+                            <td>{{ $teacher->ttl }}</td>
                             <td>{{ $teacher->jabatan }}</td>
                             <td>{{ $teacher->nip }}</td>
                             <td>{{ $teacher->nuptk }}</td>

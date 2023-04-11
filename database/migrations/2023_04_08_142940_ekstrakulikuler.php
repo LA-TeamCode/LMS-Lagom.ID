@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ekstrakulikuler', function (Blueprint $table) {
-            $table->id();
-            //remove
+            $table->uuid('id')->primary();
             $table->string('ekstrakulikuler');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

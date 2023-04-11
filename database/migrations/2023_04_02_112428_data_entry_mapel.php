@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_mata_pelajaran', function (Blueprint $table) {
-            $table->id();
-            $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
-            $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
-            $table->string('komli_id')->foreign('komli_id')->references('id')->on('komli');
-            $table->integer('mapel_id')->foreign('mapel_id')->references('id')->on('mata_pelajaran');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('mapel_id')->references('id')->on('mata_pelajaran');
+            $table->foreignUuid('komli_id')->references('id')->on('komli');
+            $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->integer('pelajaran_ke');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

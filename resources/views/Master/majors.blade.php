@@ -30,8 +30,8 @@
                             <td>{{ $major->nama_jurusan }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary m-1" data-toggle="tooltip"
-                                    data-placement="top" title="Lihat Data" onclick="showModalEdit({{ $major->id }})"><i
-                                        class="fa fa-pencil-alt"></i></button>
+                                    data-placement="top" title="Lihat Data"
+                                    onclick="showModalEdit('{{ $major->id }}')"><i class="fa fa-pencil-alt"></i></button>
 
                                 <a href="{{ route('master.majors.delete.data', $major->id) }}" class="btn btn-danger m-1"
                                     data-toggle="tooltip" data-placement="top" title="Hapus Data"><i

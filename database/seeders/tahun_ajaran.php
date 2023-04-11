@@ -15,19 +15,19 @@ class tahun_ajaran extends Seeder
     {
         $data = [
             '0' => [
-                'id' => '1',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'tahun_ajaran' => '2018/2019',
             ],
             '1' => [
-                'id' => '2',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'tahun_ajaran' => '2019/2020',
             ],
             '2' => [
-                'id' => '3',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'tahun_ajaran' => '2020/2021',
             ],
             '3' => [
-                'id' => '4',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'tahun_ajaran' => '2021/2022',
             ],
         ];

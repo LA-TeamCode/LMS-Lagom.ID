@@ -15,27 +15,27 @@ class jurusan extends Seeder
     {
         $data = [
             '0' => [
-                'id' => '1',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Rekayasa Perangkat Lunak',
             ],
             '1' => [
-                'id' => '2',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Tataboga',
             ],
             '2' => [
-                'id' => '3',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Agrobisnis ternak ruminansia',
             ],
             '3' => [
-                'id' => '4',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Teknik pengelasan',
             ],
             '4' => [
-                'id' => '5',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Perhotelan',
             ],
             '5' => [
-                'id' => '6',
+                'id' => \Illuminate\Support\Str::uuid(),
                 'nama_jurusan' => 'Geologi Pertambangan',
             ]
         ];

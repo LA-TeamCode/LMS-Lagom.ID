@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
-            $table->id();
-            $table->integer('tahun_ajaran_id')->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
-            $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->string('mata_pelajaran');
             $table->string('kelompok')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Termwind\Components\Dd;
 
 class AuthenticationController extends Controller
 {
@@ -29,6 +31,7 @@ class AuthenticationController extends Controller
         }
         $credentials = $request->only('email', 'password');
         if (auth('admin')->attempt($credentials, ($request->remember == 'on' ? true : false))) {
+
             return redirect()->intended('master');
         }
         return redirect()->back()->with('error', 'Email or password is incorrect.');

@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('semester', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->string('semester');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

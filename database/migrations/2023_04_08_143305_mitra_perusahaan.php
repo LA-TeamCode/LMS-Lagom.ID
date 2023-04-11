@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mitra_perusahaan', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('nama_perusahaan');
             $table->string('alamat');
             $table->string('kota')->nullable();
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('file_mou')->nullable();
             $table->boolean('status_mou')->default(false);
             $table->boolean('status_umkm')->default(false);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
