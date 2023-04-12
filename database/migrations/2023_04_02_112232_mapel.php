@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->string('mata_pelajaran');
             $table->string('kelompok')->nullable();

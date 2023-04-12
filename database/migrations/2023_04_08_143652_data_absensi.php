@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('data_absensi', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
+            $table->foreignUuid('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->integer('semester_id')->foreign('semester_id')->references('id')->on('semester');
             $table->integer('status');
             $table->string('keterangan')->nullable();

@@ -51,16 +51,16 @@
         $(function() {
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#students_data').DataTable({
+                processing: true,
+                language: {
+                    "processing": '<div class="d-flex justify-content-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden"></span></div></div>'
+                },
                 ajax: {
                     url: "{{ route('master.students.api.data') }}"
                 },
 
                 // "responsive": true,
                 "autoWidth": false,
-
-                "order": [
-                    [2, "asc"]
-                ],
                 "columns": [{
                         data: null,
                         render: function(data, type, row, meta) {
@@ -75,21 +75,10 @@
                         data: 'nisn'
                     },
                     {
-                        data: 'id_komli',
-                        render: function(data, type) {
-                            if (type === 'display') {
-                                //id komli
-                                let idKomli = data;
-                                //get data komli
-                                let komli = @json($komli);
-                                //get data komli
-                                let komliData = komli.find(komli => komli.id_komli == idKomli);
-                                return komliData.nama_komli;
-                            }
-                        }
+                        data: 'nama_komli',
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             let link = window.location.origin;
                             if (type === 'display') {
@@ -100,7 +89,7 @@
                         }
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             let link = window.location.origin;
                             if (type === 'display') {
@@ -111,7 +100,7 @@
                         }
                     },
                     {
-                        data: 'id_student',
+                        data: 'id',
                         render: function(data, type) {
                             if (type === 'display') {
                                 let linkEdit = window.location.origin + "/admin/data-siswa/edit/" +
@@ -129,7 +118,6 @@
                 ],
                 initComplete: function(settings, json) {
                     $('[data-toggle="tooltip"]').tooltip();
-                    alert('Load data selesai !')
                 }
             });
 

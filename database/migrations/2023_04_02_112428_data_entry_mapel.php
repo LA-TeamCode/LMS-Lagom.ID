@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('mapel_id')->references('id')->on('mata_pelajaran');
             $table->foreignUuid('komli_id')->references('id')->on('komli');
+            $table->foreignUuid('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->integer('pelajaran_ke');
             $table->timestamps();

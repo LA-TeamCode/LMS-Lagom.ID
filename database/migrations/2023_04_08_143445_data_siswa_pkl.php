@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->foreignUuid('mitra_perusahaan_id')->references('id')->on('mitra_perusahaan');
+            $table->foreignUuid('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->foreignUuid('semester_id')->references('id')->on('semester');
             $table->string('lama_pelaksanaan')->nullable();
             $table->string('nilai')->default(0);

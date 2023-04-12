@@ -19,7 +19,13 @@ class MasterController extends Controller
      */
     public function api_students()
     {
-        $data = SiswaModel::all();
+        $data = SiswaModel::leftJoin('komli', 'siswa.komli_id', '=', 'komli.id')
+            ->leftJoin('jurusan', 'komli.jurusan_id', '=', 'jurusan.id')
+            // ->leftJoin('data_orangtua_siswa', 'siswa.id', '=', 'data_orangtua_siswa.siswa_id')
+            // ->leftJoin('data_pendidikan_siswa', 'siswa.id', '=', 'data_pendidikan_siswa.siswa_id')
+            ->select('siswa.id', 'siswa.nama_lengkap', 'siswa.nisn', 'komli.nama_komli', 'siswa.komli_id')
+            ->orderBy('siswa.nama_lengkap', 'ASC')
+            ->get();
         return response()->json([
             'data' => $data
         ]);
@@ -41,6 +47,19 @@ class MasterController extends Controller
             'classes' =>  KomliModel::all()
         ];
         return view('Master.students', $data);
+    }
+    /**
+     * @param $id_student
+     * View student
+     */
+    public function viewStudent($id_student)
+    {
+        $data = SiswaModel::find($id_student);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        dd($data);
     }
 
     /**

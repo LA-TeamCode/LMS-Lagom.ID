@@ -40,6 +40,11 @@ Route::middleware([MasterMiddleware::class])->group(function () {
 
         Route::get('/api/students', [MasterController::class, 'api_students'])->name('master.students.api.data');
         Route::get('/students', [MasterController::class, 'students'])->name('master.students.data');
+        Route::post('/students', [MasterController::class, 'addStudent'])->name('master.student.add.data');
+        Route::get('/students/{id_student}', [MasterController::class, 'viewStudent'])->name('master.students.view.data');
+        Route::get('/students/edit/{id_student}', [MasterController::class, 'editStudent'])->name('master.students.edit.data');
+        Route::post('/students/edit/{id_student}', [MasterController::class, 'updateStudent'])->name('master.students.update.data');
+        Route::get('/students/delete/{id_student}', [MasterController::class, 'deleteStudent'])->name('master.students.delete.data');
 
         Route::get('/teachers', [MasterController::class, 'teachers'])->name('master.teachers.data');
         Route::post('/teachers', [MasterController::class, 'addTeacher'])->name('master.teacher.add.data');

@@ -16,7 +16,7 @@ return new class extends Migration
             //A. keterangan siswa
             $table->foreignUuid('komli_id')->references('id')->on('komli');
             $table->integer('absen')->nullable();
-            $table->string('nisn')->default(0);
+            $table->string('nisn')->default(0)->nullable();
             $table->string('no_induk')->nullable()->default('0');
             $table->string('nama_lengkap');
             $table->string('nama_panggilan')->nullable();
